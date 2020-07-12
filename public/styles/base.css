@@ -1,0 +1,71 @@
+#errorImage {
+  background-image: url(../imgs/undraw_page_not_found_su7k.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+  body {
+    background-color: #0c0c0c;
+  }
+  .h1-H {
+    background-color: black;
+    height: 40px;
+    color: #f8f8f8;
+    text-align: center;
+    line-height: 40px;
+    font-size: 32px;
+  }
+  header > a {
+    text-decoration: none;
+    text-align: center;
+    color: black;
+  }
+  #burger {
+    position: fixed;
+    right: 0;
+    top: 0;
+    color: white;
+    background: linear-gradient(45deg, #0c0c0c 10%, #1f1f1f);
+    font-size: 32px;
+    padding: 4px 4px;
+    /* border-radius: 0% 0% 0% 100%; */
+    transition: 1s;
+    cursor: pointer;
+  }
+
+  #quit {
+    position: fixed;
+    top: 0;
+    color: white;
+    font-size: 32px;
+    padding: 16px;
+    display: none;
+    cursor: pointer;
+  }
+
+  #links {
+    display: none;
+    flex-direction: column;
+    width: 100vw;
+    height: 50vh;
+    padding: 25vh 0;
+    justify-content: space-around;
+  }
+
+  #links a {
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-size: 2em;
+    font-family: "Roboto";
+    z-index: 10;
+  }
+  /* ////////////////////////////////// */
+
+}
