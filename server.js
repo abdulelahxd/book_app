@@ -14,28 +14,28 @@ const server = express();
 server.use(express.static("./public"));
 // this is for templating from express server
 const ejs = require("ejs");
-// const { search } = require("superagent");
+// middleware
 server.set("view engine", "ejs");
 server.use(express.urlencoded({ extended: true }));
-//////////////////////// ROUTES ///////////////////////
+//////////////////////// EMPTY ROUTE ///////////////////////
 server.get("/", (req, res) => {
-  res.send("Hello there!");
+  res.render("pages/searches/new.ejs");
 });
 
-//////////////////// ROUTE ONE ///////////////////////
+//////////////////// HOME PAGE///////////////////////
 server.get("/index", (req, res) => {
   res.render("pages/index.ejs");
 });
 
-//////////////////// ROUTE TWO ///////////////////////
+//////////////////// SEARCH PAGE ///////////////////////
 server.get("/search/new", (req, res) => {
   res.render("pages/searches/new.ejs");
 });
 
-//////////////////// ROUTE THREE ///////////////////////
+//////////////////// VIEW PAGE ///////////////////////
 server.post("/searches", (req, res) => {
     let S1 = req.body.S2;
-    let variablle = req.body.mmd;
+    let variablle = req.body.inputName;
     if (S1 == 'Author'){
       const url = `https://www.googleapis.com/books/v1/volumes?q=${variablle}+inauthor`;
       superagent.get(url).then((bookData) => {
@@ -58,20 +58,19 @@ server.post("/searches", (req, res) => {
     }
 });
 
-let bookAll = [];
 function Book(info) {
   this.thumnail = info.volumeInfo.imageLinks.thumbnail;
   this.BookTitle = info.volumeInfo.title;
   this.AuthorName = info.volumeInfo.authors;
   this.BookDescription = info.volumeInfo.description;
-  bookAll.push(this);
 }
-
-
-// catch errors
+//////////////////// ERROR PAGE ///////////////////////
 server.get("*", (req, res) => {
-  res.status(404).send("the page is not found");
+  res.render('pages/error');
 });
+
+
+
 
 // this is will tell the port to listen to this server I think
 server.listen(PORT, () => {
