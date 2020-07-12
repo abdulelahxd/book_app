@@ -48,7 +48,6 @@ server.post("/searches", (req, res) => {
           return newObj;
         });
         res.render("pages/searches/show", { bookDetails : bookInfo});
-        // console.log(bookInfo);
       });
     }
 });
