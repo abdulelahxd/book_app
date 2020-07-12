@@ -17,13 +17,8 @@ const ejs = require("ejs");
 // middleware
 server.set("view engine", "ejs");
 server.use(express.urlencoded({ extended: true }));
-//////////////////////// EMPTY ROUTE ///////////////////////
+//////////////////////// HOME PAGE ///////////////////////
 server.get("/", (req, res) => {
-  res.render("pages/searches/new.ejs");
-});
-
-//////////////////// HOME PAGE///////////////////////
-server.get("/index", (req, res) => {
   res.render("pages/index.ejs");
 });
 
@@ -36,7 +31,7 @@ server.get("/search/new", (req, res) => {
 server.post("/searches", (req, res) => {
     let S1 = req.body.S2;
     let variablle = req.body.inputName;
-    if (S1 == 'Author'){
+    if (S1 == 'author'){
       const url = `https://www.googleapis.com/books/v1/volumes?q=${variablle}+inauthor`;
       superagent.get(url).then((bookData) => {
         let bookInfo = bookData.body.items.map((item) => {
@@ -53,7 +48,7 @@ server.post("/searches", (req, res) => {
           return newObj;
         });
         res.render("pages/searches/show", { bookDetails : bookInfo});
-        console.log(bookInfo);
+        // console.log(bookInfo);
       });
     }
 });
@@ -68,9 +63,6 @@ function Book(info) {
 server.get("*", (req, res) => {
   res.render('pages/error');
 });
-
-
-
 
 // this is will tell the port to listen to this server I think
 server.listen(PORT, () => {
