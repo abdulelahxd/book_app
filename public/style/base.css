@@ -1,3 +1,9 @@
 body {
     background-color: aqua;
 }
+
+#errorImage {
+    background-image: url(../imgs/undraw_page_not_found_su7k.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
