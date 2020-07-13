@@ -70,4 +70,8 @@
   main ul li {
     color: #f8f8f8;
   }
+  .toggleForm{
+    display: none;
+    /* visibility: hidden; */
+  }
 }
