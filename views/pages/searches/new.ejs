@@ -1,34 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/reset.css">
-    <link rel="stylesheet" href="/styles/base.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>Lookup books</title>
+    <%- include('../../layout/head') %>
+    <title>Search</title>
 </head>
+
 <body>
     <header>
-        <h1 class="h1-H">Find a book</h1>
-        <i id="burger" class="material-icons" onclick="burger()">menu</i>
-        <i id="quit" class="material-icons" onclick="quit()">clear</i>
-        <div id="links">
-            <a href="/search/new">Search</a>
-            <!-- <a href="">SecondPage</a> -->
-            <!-- <a href="">ThirdPage</a> -->
-        </div>
+        <%- include('../../layout/header.ejs')%>
     </header>
     <main>
         <form action="/searches" method="post">
             <label for="title">Title</label>
-            <input type="radio" id="title" value="title" name="S2">
+            <input type="radio" id="title" value="title" name="search">
             <label for="author">author</label>
-            <input type="radio" id="author" value="author" name="S2">
+            <input type="radio" id="author" value="author" name="search">
             <input type="text" name="inputName">
             <button>Search</button>
         </form>
     </main>
-    <script src="js/book.js"></script>
+    <script src="../js/book.js"></script>
 </body>
+
 </html>
