@@ -1,69 +1,81 @@
 "use strict";
 
-// this is for using express library
-const express = require("express");
-// this is DOTENV (read our enviroment) this is for using dotenv library
 require("dotenv").config();
-// this will help us to get data from APIs and store them
+
+const express = require("express");
 const superagent = require("superagent");
-// this is for the PORT it is sotred in .env file which is hidden online
-const PORT = process.env.PORT || process.env.PORTTWO;
-// this is for using express library
-const server = express();
-// this for the public folder and static
-server.use(express.static("./public"));
-// this is for templating from express server
 const ejs = require("ejs");
+const pg = require("pg");
+
+const server = express();
+const PORT = process.env.PORT || process.env.PORTTWO;
+const client = new pg.Client(process.env.DATABASE_URL);
+
 // middleware
+server.use(express.static("./public"));
 server.set("view engine", "ejs");
 server.use(express.urlencoded({ extended: true }));
+
 //////////////////////// HOME PAGE ///////////////////////
 server.get("/", (req, res) => {
-  res.render("pages/index.ejs");
+  let SQL = `SELECT * FROM booksdb;`;
+  client.query(SQL).then((data) => {
+    res.render("pages/index", { bookInfo: data.rows, counter : data.rowCount });
+  });
 });
 
 //////////////////// SEARCH PAGE ///////////////////////
 server.get("/search/new", (req, res) => {
-  res.render("pages/searches/new.ejs");
+  res.render("pages/searches/new");
 });
 
 //////////////////// VIEW PAGE ///////////////////////
 server.post("/searches", (req, res) => {
-    let S1 = req.body.S2;
-    let variablle = req.body.inputName;
-    if (S1 == 'author'){
-      const url = `https://www.googleapis.com/books/v1/volumes?q=${variablle}+inauthor`;
-      superagent.get(url).then((bookData) => {
-        let bookInfo = bookData.body.items.map((item) => {
-          let newObj = new Book(item);
-          return newObj;
-        });
-        res.render("pages/searches/show", { bookDetails : bookInfo});
-      });
-    } else{
-      const url = `https://www.googleapis.com/books/v1/volumes?q=${variablle}+intitle`;
-      superagent.get(url).then((bookData) => {
-        let bookInfo = bookData.body.items.map((item) => {
-          let newObj = new Book(item);
-          return newObj;
-        });
-        res.render("pages/searches/show", { bookDetails : bookInfo});
-      });
-    }
+  // input field
+  let input = req.body.inputName;
+  let url = "";
+  if (req.body.search === "title") {
+    url = `https://www.googleapis.com/books/v1/volumes?q=${input}+intitle`;
+  }
+  else {
+    url = `https://www.googleapis.com/books/v1/volumes?q=${input}+inauthor`;
+  }
+  superagent.get(url).then((bookData) => {
+    let bookInfo = bookData.body.items.map((item) => {
+      let newObj = new Book(item);
+      return newObj;
+    });
+    res.render("pages/searches/show", { bookDetails: bookInfo });
+  });
 });
 
 function Book(info) {
-  this.thumnail = info.volumeInfo.imageLinks.thumbnail;
-  this.BookTitle = info.volumeInfo.title;
-  this.AuthorName = info.volumeInfo.authors;
-  this.BookDescription = info.volumeInfo.description;
+  this.thumnail = info.volumeInfo.imageLinks.thumbnail ? info.volumeInfo.imageLinks.thumbnail : "https://i.ytimg.com/vi/uiCm88Me_3U/maxresdefault.jpg";
+  this.BookTitle = info.volumeInfo.title ? info.volumeInfo.title : "No Name Avaliable";
+  this.ISBN = info.volumeInfo.industryIdentifiers[0].identifier ? info.volumeInfo.industryIdentifiers[0].identifier : "Not Exists";
+  this.AuthorName = info.volumeInfo.authors ? info.volumeInfo.authors : "Not Found";
+  this.BookDescription = info.volumeInfo.description ? info.volumeInfo.BookDescription : "No Description Found";
+  this.Bookshell = info.volumeInfo.categories ? info.volumeInfo.categories : "Not under a class";
 }
+//////////////////// DETAILS ABOUT BOOK PAGE ///////////////////////
+server.get('/books/:id',showMoreDetails);
+
+function showMoreDetails(req,res) {
+  let SQL = `SELECT * FROM booksdb WHERE id=$1;`;
+  let values = [req.params.id];
+  client.query(SQL, values).then( data=>{
+    res.render("pages/books/show", { Details : data.rows[0]});
+  });
+}
+
 //////////////////// ERROR PAGE ///////////////////////
 server.get("*", (req, res) => {
-  res.render('pages/error');
+  res.render("pages/error");
 });
 
 // this is will tell the port to listen to this server I think
-server.listen(PORT, () => {
-  console.log(`do not kill me please ${PORT}`);
+client.connect().then(()=>{
+  server.listen(PORT, () => {
+    console.log(`do not kill me please ${PORT}`);
+  });
 });

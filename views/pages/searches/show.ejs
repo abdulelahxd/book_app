@@ -2,39 +2,35 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/reset.css">
-    <link rel="stylesheet" href="/styles/base.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>show Page</title>
+    <%- include('../../layout/head') %>
+    <title>Show Book</title>
 </head>
 
 <body>
     <header>
-        <h1 class="h1-H">Google API Books</h1>
-        <i id="burger" class="material-icons" onclick="burger()">menu</i>
-        <i id="quit" class="material-icons" onclick="quit()">clear</i>
-        <div id="links">
-            <a href="/">Home</a>
-            <a href="/search/new">Search</a>
-        </div>
+        <%- include('../../layout/header.ejs')%>
     </header>
     <main>
         <ul>
             <% bookDetails.forEach(item=>{ %>
-                <li>
-                    <img src="<%= item.thumnail %>">
-                </li>
-                <li>
-                   <%= item.BookTitle %>
-                </li>
-                <li>
-                   <%= item.AuthorName %>
-                </li>
-                <li>
-                   <%= item.BookDescription %>
-                </li>
+            <li>
+                <img src="<%= item.thumnail %>">
+            </li>
+            <li>
+                <%= item.BookTitle %>
+            </li>
+            <li>
+                <%= item.AuthorName %>
+            </li>
+            <li>
+                <%= item.BookDescription %>
+            </li>
+            <li>
+                <%= item.ISBN %>
+            </li>
+            <li>
+                <%= item.Bookshell %>
+            </li>
             <% }); %>
         </ul>
     </main>
