@@ -15,3 +15,8 @@ function burger(){
     links.style.display = 'none';
     quit.style.display = 'none';
   }
+
+
+  $('#viewButton').on('click', function () {
+    $('.toggleForm').slideToggle();
+  });

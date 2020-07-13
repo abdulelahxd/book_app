@@ -31,6 +31,15 @@
             <li>
                 <%= item.Bookshell %>
             </li>
+            <button id="viewButton">View</button>
+            <form action="" class="toggleForm">
+                <input type="text" value="<%= item.BookTitle %>">
+                <input type="text" value="<%= item.AuthorName %>">
+                <input type="text" value="<%= item.thumnail %>">
+                <input type="text" value="<%= item.ISBN %>">
+                <textarea><%= item.BookDescription %></textarea>
+                <input type="text" id="categoryInput">
+            </form>
             <% }); %>
         </ul>
     </main>
