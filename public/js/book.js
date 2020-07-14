@@ -20,3 +20,8 @@ function burger(){
   $('.viewButton').click(function () {
     $(this).parent().find('.toggleForm').slideToggle();
   });
+
+  $('#toggleUpdate').click(function(){
+    // $('#updateForm').slideToggle();
+    alert("Hi")
+  });
