@@ -10,26 +10,16 @@
     <header>
         <%- include('../layout/header.ejs')%>
     </header>
-    <main>
-        <div>
-            <p>
-                <%= counter %>
-            </p>
-            <ul>
-                <% bookInfo.forEach(item=>{ %>
-                <li>
-                    <img src="<%= item.image_url %>">
-                </li>
-                <li>
-                    <%= item.title %>
-                </li>
-                <li>
-                    <%= item.author %>
-                </li>
-                <button><a href="/books/<%= item.id %>">View Details</a></button>
-                <% }); %>
-            </ul>
+    <main id="home">
+        <p><%= counter %> Saved Books</p>
+        <% bookInfo.forEach(item=>{ %>
+        <div id="a-center">
+            <img src="<%= item.image_url %>" id="img">
+            <h2 class="TP"><%= item.title %></h2>
+            <h2 class="TP"><%= item.author %></h2>
+            <button><a href="/books/<%= item.id %>">View Details</a></button>
         </div>
+        <% }); %>
     </main>
     <script src="js/book.js"></script>
 </body>
