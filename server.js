@@ -6,16 +6,17 @@ const express = require("express");
 const superagent = require("superagent");
 const ejs = require("ejs");
 const pg = require("pg");
+const methodOverride = require('method-override');
 
 const server = express();
 const PORT = process.env.PORT || 3030;
 const client = new pg.Client(process.env.DATABASE_URL);
-
 // middleware
 server.use(express.static("./public"));
 server.set("view engine", "ejs");
 server.use(express.urlencoded({ extended: true }));
-
+// for delete and update
+server.use(methodOverride('_method'));
 //////////////////////// HOME PAGE ///////////////////////
 server.get("/", (req, res) => {
   let SQL = `SELECT * FROM booksdb;`;
@@ -64,30 +65,54 @@ function showMoreDetails(req,res) {
   let SQL = `SELECT * FROM booksdb WHERE id=$1;`;
   let values = [req.params.id];
   client.query(SQL, values).then( data=>{
-    res.render("pages/books/show", { Details : data.rows[0]});
+    res.render("pages/books/detail", { Details : data.rows[0]});
   });
 }
-
 
 server.post('/books',addToDB);
-
 function addToDB(req, res){
-  
+
   const item = req.body;
-  console.log(req.params.id)
   let SQL = `INSERT INTO booksdb (author, title, ISBN, image_url, description, bookshell) VALUES($1, $2, $3, $4, $5, $6);`
+  let SQL2 = `SELECT * FROM booksdb;`;
   const safeValues = [item.author, item.bookTitle, item.ISBN, item.thumnail, item.description, item.bookshell];
-  client.query(SQL, safeValues).then( data=>{
-
-    res.redirect(`/books/:ISBN`);
-    // console.log(data.rows)
-    
-
+  client.query(SQL, safeValues)
+  .then( data=>{
+    client.query(SQL2).then(data2=>{
+      res.render("pages/books/show", { Details : data2.rows[data2.rows.length-1]});
+    });
   });
 }
 
+server.get('/show', storedBookShow);
 
+function storedBookShow(req, res) {
+    res.render('pages/books/show');
+}
 
+server.get('/deleteItem/:id', deletBook)
+
+function deletBook(req, res) {
+  const bookId = req.params.id;
+  let SQL = `DELETE FROM booksdb WHERE id=${bookId}`
+  client.query(SQL)
+  .then( data=>{
+    res.redirect("/");
+  });
+}
+//////////////////////UPDATE/////////////////////////
+server.put('/updateItem/:id', updateBook)
+
+function updateBook(req, res) {
+  let {author, bookTitle, ISBN, thumnail, description, bookshell} = req.body;
+  let SQL = `UPDATE booksdb SET author=$1, title=$2, ISBN=$3, image_url=$4, description=$5, bookshell=$6;`;
+  let safeValues = [author, bookTitle, ISBN, thumnail, description, bookshell];
+
+  client.query(SQL,safeValues)
+  .then( data=>{
+    res.redirect("/");
+  });
+}
 
 //////////////////// ERROR PAGE ///////////////////////
 server.get("*", (req, res) => {
@@ -99,4 +124,4 @@ server.get("*", (req, res) => {
    server.listen(PORT, () => {
      console.log(`do not kill me please ${PORT}`);
    });
- })
+ });
