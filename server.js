@@ -8,7 +8,7 @@ const ejs = require("ejs");
 const pg = require("pg");
 
 const server = express();
-const PORT = process.env.PORT || process.env.PORTTWO;
+const PORT = process.env.PORT || 3030;
 const client = new pg.Client(process.env.DATABASE_URL);
 
 // middleware
@@ -68,14 +68,35 @@ function showMoreDetails(req,res) {
   });
 }
 
+
+server.post('/books',addToDB);
+
+function addToDB(req, res){
+  
+  const item = req.body;
+  console.log(req.params.id)
+  let SQL = `INSERT INTO booksdb (author, title, ISBN, image_url, description, bookshell) VALUES($1, $2, $3, $4, $5, $6);`
+  const safeValues = [item.author, item.bookTitle, item.ISBN, item.thumnail, item.description, item.bookshell];
+  client.query(SQL, safeValues).then( data=>{
+
+    res.redirect(`/books/:ISBN`);
+    // console.log(data.rows)
+    
+
+  });
+}
+
+
+
+
 //////////////////// ERROR PAGE ///////////////////////
 server.get("*", (req, res) => {
   res.render("pages/error");
 });
 
 // this is will tell the port to listen to this server I think
-client.connect().then(()=>{
-  server.listen(PORT, () => {
-    console.log(`do not kill me please ${PORT}`);
-  });
-});
+ client.connect().then(()=>{
+   server.listen(PORT, () => {
+     console.log(`do not kill me please ${PORT}`);
+   });
+ })
