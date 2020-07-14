@@ -12,6 +12,8 @@
 @media (min-width: 320px) and (max-width: 480px) {
   body {
     background-color: #0c0c0c;
+    color: #f8f8f8;
+    box-sizing: border-box;
   }
   .h1-H {
     background-color: black;
@@ -66,12 +68,170 @@
     font-family: "Roboto";
     z-index: 10;
   }
-  /* ////////////////////////////////// */
-  main ul li {
+  /* //////////////index.ejs//////////////////// */
+  main > p {
+    text-align: center;
+    background-color: lightblue;
+    color: black;
+    margin: auto auto;
+    margin-bottom: 20px;
+  }
+
+  #a-center {
+    background-color: rgb(44, 44, 44);
+    text-align: center;
+    width: 70%;
+    margin: auto auto;
+    margin-bottom: 40px;
+    padding: 20px;
+    box-shadow: rgb(39, 39, 39) 1px 1px 6px 1px;
+  }
+  #a-center h2 {
+    text-align: center;
+    font-size: 14px;
+    font-style: oblique;
+    line-height: 18px;
+    padding-bottom: 10px;
+  }
+  #a-center button {
+    background-color: #1f1f1f;
+    border: none;
+    padding: 8px 16px;
+  }
+  #a-center button a {
+    text-decoration: none;
+    color: lightblue;
+  }
+  /* //////////////search/new.ejs//////////////////// */
+  #bookForm {
+    background-color: rgb(19, 19, 19);
+    width: 90%;
+    margin: auto auto;
+    height: 260px;
+    margin-top: 40px;
+    box-shadow: black 1px 1px 6px;
+    text-align: center;
+  }
+
+  #bookForm button {
+    background-color: #1f1f1f;
+    border: none;
+    padding: 8px 16px;
+    color: #f8f8f8;
+    box-shadow: black 1px 1px 6px;
+    margin-top: 16px;
+    width: 30%;
+  }
+  #title {
+    margin-top: 60px;
+  }
+  #author {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  #inputId {
+    padding: 8px;
+    width: 40%;
+  }
+  /* //////////////search/show.ejs//////////////////// */
+  #container {
+    background-color: rgb(44, 44, 44);
+    text-align: center;
+    width: 70%;
+    margin: auto auto;
+    margin-bottom: 0px;
+    margin-top: 20px;
+    padding: 20px;
+    box-shadow: rgb(39, 39, 39) 1px 1px 6px 1px;
+  }
+  .viewButton {
+    background-color: rgb(44, 44, 44);
+    border: none;
+    padding: 8px 16px;
+    width: 79%;
+    box-shadow: rgb(0, 0, 0) 1px 1px 6px 1px;
     color: #f8f8f8;
   }
-  .toggleForm{
-    display: none;
-    /* visibility: hidden; */
+  #show {
+    text-align: center;
   }
+  main > div > p > span {
+    color: lightcoral;
+  }
+  /* /////////  the form /////////////// */
+  .inputClass{
+    margin: 6px;
+    width: 78%;
+    height: 20px;
+  }
+  .labelForm{
+    color: lightcoral;
+    text-align: center;
+  }
+  .toggleForm button {
+    background-color: #1f1f1f;
+    border: none;
+    padding: 8px 16px;
+    color: #f8f8f8;
+    box-shadow: black 1px 1px 6px;
+    margin-top: 16px;
+    width: 50%;
+  }
+  /* //////////////pages/books/detail.ejs//////////////////// */
+  #divId {
+    background-color: rgb(19, 19, 19);
+    width: 90%;
+    margin: auto auto;
+    margin-top: 40px;
+    box-shadow: black 1px 1px 6px;
+    text-align: center;
+  }
+  .but {
+    background-color: #1f1f1f;
+    border: none;
+    padding: 8px 16px;
+    color: #f8f8f8;
+    box-shadow: black 1px 1px 6px;
+    margin-top: 16px;
+    width: 30%;
+    margin-bottom: 10px;
+  }
+  .but a {
+    text-decoration: none;
+    color: lightcoral;
+  }
+  .del{
+    background-color: #1f1f1f;
+    border: none;
+    padding: 8px 16px;
+    color: #f8f8f8;
+    box-shadow: black 1px 1px 6px;
+    margin-top: 16px;
+    width: 30%;
+    margin-bottom: 10px;
+  }
+  .del a {
+    text-decoration: none;
+    color: #f8f8f8;
+  }
+  #imgFour{
+    margin: 20px 0px 20px 0;
+  }
+  #divId span {
+    color: lightcoral;
+  }
+  #divId  h2,h3,p {
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+  /* //////////////pages/books/detail.ejs//////////////////// */
+
+}
+
+.toggleForm {
+  display: none;
+}
+
+#updateForm {
+  display: none;
 }

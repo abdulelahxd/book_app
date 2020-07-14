@@ -1,17 +1,45 @@
-<div>
-    <img src=" <%= Details.image_url%>" alt="" srcset="" />
+<div id="divId">
+    <img src=" <%= Details.image_url%>" id="imgFour" />
     <h2>
+        <span>
+            Title
+        </span> <br>
         <%= Details.title%><br />
     </h2>
     <h3>
+        <span>
+            Author
+        </span> <br>
         <%= Details.author %>
     </h3>
-    <p><%= Details.description%></p>
     <p>
-        <%= Details.isbn %>
+        <span>
+            Description
+        </span> <br>
+        <%= Details.description%></p>
+    <p>
+        <span>
+            ISBN
+        </span> <br>
+        <%= Details.ISBN %>
     </p>
     <p>
-        <%= Details.bookshelf %>
+        <span>
+            Category
+        </span> <br>
+        <%= Details.bookshell %>
     </p>
-    <a href="/books"></a>
+    <button class="del"><a href="/deleteItem/<%= Details.id%>">Delete</a></button>
+    <button id="toggleUpdate" class="but">update</button>
+    <button class="but"><a href="/">Go Home</a></button>
 </div>
+
+<form action="/updateItem/<%= Details.id %>?_method=put" method="post" id="updateForm">
+    <input type="text" name='title' value="<%= Details.title%>" placeholder="book title"> <br>
+    <textarea type="text" name='description' placeholder="Task Description" cols="40" rows="20">
+        <%= Details.description%>
+    </textarea> <br>
+    <input type="text" name='author' value='<%= Details.author %>' placeholder="author name"> <br>
+    <input type="text" name='ISBN' value='<%= Details.ISBNS %>' placeholder="author name"> <br>
+    <input type="text" name='category' value='<%= Details.bookshell %>' placeholder="author name">
+</form>

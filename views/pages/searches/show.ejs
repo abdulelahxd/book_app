@@ -10,42 +10,39 @@
     <header>
         <%- include('../../layout/header.ejs')%>
     </header>
-    <main>
-        <ul>
+    <main id="show">
             <% bookDetails.forEach(item=>{ %>
-            <li>
-                <img src="<%= item.thumnail %>">
-            
-            
-                <%= item.BookTitle %>
-            
-           
-                <%= item.AuthorName %>
-            
-            
-                <%= item.BookDescription %>
-            
-           
-                <%= item.ISBN %>
-            
-            
-                <%= item.Bookshell %>
-            
-            <button class="viewButton">View</button>
-            <form action="/books" class="toggleForm" method="post">
-                <input type="text" value="<%= item.BookTitle %>" name="bookTitle">
-                <input type="text" value="<%= item.AuthorName %>" name="author">
-                <input type="text" value="<%= item.thumnail %>"  name="thumnail">
-                <input type="text" value="<%= item.ISBN %>"  name="ISBN">
-                <textarea  name="description"><%= item.BookDescription %></textarea>
-                <input type="text" value="<%= item.Bookshell %>" name="bookshell">
-                <!-- <input type="text" value="<%= item.id %>" name="id"> -->
-
-                <button>Submit</button>
-            </form>
-        </li>
+                <div id="container">
+                    <img src="<%= item.thumnail %>">
+                    <p><span>Title </span><br><%= item.BookTitle %></p>
+                    <p><span>Author </span><br><%= item.AuthorName %></p>
+                    <p><span>Description </span><br><%= item.BookDescription %></p>
+                    <p><span>ISBN </span><br><%= item.ISBN %></p>
+                    <p><span>Category </span><br><%= item.Bookshell %></p>
+                </div>
+                <button class="viewButton">View</button>
+                <form action="/books" class="toggleForm" method="post">
+                    <label class="labelForm">book title <br>
+                        <input type="text" class="inputClass" value="<%= item.BookTitle %>" name="bookTitle"> <br>
+                    </label>
+                    <label class="labelForm">author name <br>
+                        <input type="text" class="inputClass" value="<%= item.AuthorName %>" name="author"> <br>
+                    </label>
+                    <label class="labelForm">Book Cover <br>
+                        <input type="text" class="inputClass" value="<%= item.thumnail %>" name="thumnail"> <br>
+                    </label>
+                    <label class="labelForm">ISBN <br>
+                        <input type="text" class="inputClass" value="<%= item.ISBN %>" name="ISBN"> <br>
+                    </label>
+                    <label class="labelForm">description <br>
+                        <textarea name="description"><%= item.BookDescription %></textarea> <br>
+                    </label>
+                    <label class="labelForm">category <br>
+                        <input type="text" class="inputClass" value="<%= item.Bookshell %>" name="bookshell"> <br>
+                    </label>
+                    <button>Add to Database</button>
+                </form>
             <% }); %>
-        </ul>
     </main>
     <script src="js/book.js"></script>
 </body>
