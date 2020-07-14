@@ -17,6 +17,6 @@ function burger(){
   }
 
 
-  $('#viewButton').on('click', function () {
-    $('.toggleForm').slideToggle();
+  $('.viewButton').click(function () {
+    $(this).parent().find('.toggleForm').slideToggle();
   });
