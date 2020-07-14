@@ -8,10 +8,25 @@
     </h3>
     <p><%= Details.description%></p>
     <p>
-        <%= Details.isbn %>
+        <%= Details.ISBNS %>
     </p>
     <p>
-        <%= Details.bookshelf %>
+        <%= Details.bookshell %>
     </p>
     <a href="/books"></a>
 </div>
+
+<form action="/updateItem/<%= Details.id %>?_method=put" method="post" id="updateForm">
+    <input type="text" name='title' value="<%= Details.title%>" placeholder="book title"> <br>
+    <textarea type="text" name='description' placeholder="Task Description" cols="40" rows="20">
+        <%= Details.description%>
+    </textarea> <br>
+    <input type="text" name='author' value='<%= Details.author %>' placeholder="author name"> <br>
+    <input type="text" name='ISBN' value='<%= Details.ISBNS %>' placeholder="author name"> <br>
+    <input type="text" name='category' value='<%= Details.bookshell %>' placeholder="author name">
+</form>
+
+<button class="del"><a href="/deleteItem/<%= Details.id%>">Delete</a></button>
+<button id="toggleUpdate">update</button>
+
+
