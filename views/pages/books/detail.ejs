@@ -32,9 +32,9 @@
     <button class="del"><a href="/deleteItem/<%= Details.id%>">Delete</a></button>
     <button id="toggleUpdate" class="but">update</button>
     <button class="but"><a href="/">Go Home</a></button>
-</div>
 
-<form action="/updateItem/<%= Details.id %>?_method=put" method="post" id="updateForm">
+<form action="/updateItem/<%= Details.id %>?_method=put" method="post" class="toggleForm">
+    <img src=" <%= Details.image_url%>" id="imgFour" />
     <input type="text" name='title' value="<%= Details.title%>" placeholder="book title"> <br>
     <textarea type="text" name='description' placeholder="Task Description" cols="40" rows="20">
         <%= Details.description%>
@@ -42,4 +42,6 @@
     <input type="text" name='author' value='<%= Details.author %>' placeholder="author name"> <br>
     <input type="text" name='ISBN' value='<%= Details.ISBNS %>' placeholder="author name"> <br>
     <input type="text" name='category' value='<%= Details.bookshell %>' placeholder="author name">
+    <button class="but">update</button>
 </form>
+</div>

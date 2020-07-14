@@ -21,7 +21,8 @@ function burger(){
     $(this).parent().find('.toggleForm').slideToggle();
   });
 
-  $('#toggleUpdate').click(function(){
-    // $('#updateForm').slideToggle();
-    alert("Hi")
+  $('#divId .but').click(function(){
+    console.log("HHHHHHH;");
+    alert("Hello");
+    // $('.toggleForm').slideToggle();
   });

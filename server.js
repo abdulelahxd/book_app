@@ -105,8 +105,9 @@ server.put('/updateItem/:id', updateBook)
 
 function updateBook(req, res) {
   let {author, bookTitle, ISBN, thumnail, description, bookshell} = req.body;
-  let SQL = `UPDATE booksdb SET author=$1, title=$2, ISBN=$3, image_url=$4, description=$5, bookshell=$6;`;
-  let safeValues = [author, bookTitle, ISBN, thumnail, description, bookshell];
+  let SQL = `UPDATE booksdb SET author=$1, title=$2, ISBN=$3, image_url=$4, description=$5, bookshell=$6 WHERE id=$7;`;
+  let id = req.params.id;
+  let safeValues = [author, bookTitle, ISBN, thumnail, description, bookshell,id];
 
   client.query(SQL,safeValues)
   .then( data=>{
