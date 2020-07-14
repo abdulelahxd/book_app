@@ -15,35 +15,34 @@
             <% bookDetails.forEach(item=>{ %>
             <li>
                 <img src="<%= item.thumnail %>">
-            
-            
                 <%= item.BookTitle %>
-            
-           
                 <%= item.AuthorName %>
-            
-            
                 <%= item.BookDescription %>
-            
-           
                 <%= item.ISBN %>
-            
-            
                 <%= item.Bookshell %>
-            
-            <button class="viewButton">View</button>
-            <form action="/books" class="toggleForm" method="post">
-                <input type="text" value="<%= item.BookTitle %>" name="bookTitle">
-                <input type="text" value="<%= item.AuthorName %>" name="author">
-                <input type="text" value="<%= item.thumnail %>"  name="thumnail">
-                <input type="text" value="<%= item.ISBN %>"  name="ISBN">
-                <textarea  name="description"><%= item.BookDescription %></textarea>
-                <input type="text" value="<%= item.Bookshell %>" name="bookshell">
-                <!-- <input type="text" value="<%= item.id %>" name="id"> -->
-
-                <button>Submit</button>
-            </form>
-        </li>
+                <button class="viewButton">View</button>
+                <form action="/books" class="toggleForm" method="post">
+                    <label for="">book title
+                        <input type="text" value="<%= item.BookTitle %>" name="bookTitle">
+                    </label>
+                    <label for="">author name
+                        <input type="text" value="<%= item.AuthorName %>" name="author">
+                    </label>
+                    <label for="">
+                        <input type="text" value="<%= item.thumnail %>" name="thumnail">
+                    </label>
+                    <label for="">ISBN
+                        <input type="text" value="<%= item.ISBN %>" name="ISBN">
+                    </label>
+                    <label for="">description
+                        <textarea name="description"><%= item.BookDescription %></textarea>
+                    </label>
+                    <label for="">category
+                        <input type="text" value="<%= item.Bookshell %>" name="bookshell">
+                    </label>
+                    <button>Add to Database</button>
+                </form>
+            </li>
             <% }); %>
         </ul>
     </main>
